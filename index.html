@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Perpustakaan Mochi 🎀</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Pacifico&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Maskot Mochi (kucing pink orisinal) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="mochi" viewBox="0 0 200 190">
+      <polygon points="38,78 48,14 92,48" fill="#ffd6e7" stroke="#ff8fb8" stroke-width="4" stroke-linejoin="round"/>
+      <polygon points="162,78 152,14 108,48" fill="#ffd6e7" stroke="#ff8fb8" stroke-width="4" stroke-linejoin="round"/>
+      <polygon points="50,62 55,32 76,50" fill="#ffb3cf"/>
+      <polygon points="150,62 145,32 124,50" fill="#ffb3cf"/>
+      <ellipse cx="100" cy="102" rx="82" ry="66" fill="#fff0f6" stroke="#ff8fb8" stroke-width="4"/>
+      <path d="M88 44 q4 12 0 18 M100 40 q0 14 0 20 M112 44 q-4 12 0 18" stroke="#ff9cc2" stroke-width="4" stroke-linecap="round" fill="none"/>
+      <ellipse cx="66" cy="102" rx="9" ry="11" fill="#5b2a45"/>
+      <ellipse cx="134" cy="102" rx="9" ry="11" fill="#5b2a45"/>
+      <circle cx="69" cy="97" r="3.5" fill="#fff"/>
+      <circle cx="137" cy="97" r="3.5" fill="#fff"/>
+      <ellipse cx="46" cy="122" rx="14" ry="8" fill="#ffb3cf" opacity=".75"/>
+      <ellipse cx="154" cy="122" rx="14" ry="8" fill="#ffb3cf" opacity=".75"/>
+      <path d="M95 114 h10 l-5 7 z" fill="#ff6fa5" stroke="#ff6fa5" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M100 121 q-1 9 -9 8 M100 121 q1 9 9 8" stroke="#5b2a45" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <g stroke="#ff8fb8" stroke-width="3" stroke-linecap="round">
+        <line x1="14" y1="108" x2="36" y2="112"/><line x1="12" y1="122" x2="34" y2="122"/>
+        <line x1="186" y1="108" x2="164" y2="112"/><line x1="188" y1="122" x2="166" y2="122"/>
+      </g>
+      <!-- pita hati di leher -->
+      <path d="M100 172 L72 156 Q62 172 72 186 Z" fill="#ff6fa5" stroke="#e24c88" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M100 172 L128 156 Q138 172 128 186 Z" fill="#ff6fa5" stroke="#e24c88" stroke-width="3" stroke-linejoin="round"/>
+      <circle cx="100" cy="171" r="8" fill="#ff9cc2" stroke="#e24c88" stroke-width="3"/>
+    </symbol>
+  </svg>
+
+  <div class="floaties" id="floaties" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#">
+      <svg class="brand-cat"><use href="#mochi"/></svg>
+      <span>Perpustakaan Mochi</span>
+    </a>
+    <button class="btn btn-primary" id="openAdd">＋ Tambah Buku</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="hero-tag">✨ selamat datang ✨</p>
+        <h1>Baca buku, <br />peluk cerita <span class="heart">💗</span></h1>
+        <p>Pinjam buku favoritmu, simpan yang kamu suka, dan temani harimu dengan bacaan yang manis.</p>
+      </div>
+      <div class="hero-cat">
+        <div class="bubble" id="bubble">Halo! Mau baca apa hari ini? 🎀</div>
+        <svg class="mascot" id="mascot" role="img" aria-label="Maskot kucing pink Mochi"><use href="#mochi"/></svg>
+      </div>
+    </section>
+
+    <section class="stats" aria-label="Statistik perpustakaan">
+      <div class="stat"><span class="stat-ic">📚</span><b id="statTotal">0</b><small>Total buku</small></div>
+      <div class="stat"><span class="stat-ic">🍓</span><b id="statAvail">0</b><small>Tersedia</small></div>
+      <div class="stat"><span class="stat-ic">🎀</span><b id="statBorrowed">0</b><small>Dipinjam</small></div>
+      <div class="stat"><span class="stat-ic">💖</span><b id="statFav">0</b><small>Favorit</small></div>
+    </section>
+
+    <section class="toolbar">
+      <div class="search">
+        <span>🔍</span>
+        <input type="search" id="search" placeholder="Cari judul atau penulis..." autocomplete="off" />
+      </div>
+      <select id="category" aria-label="Kategori"></select>
+      <select id="sort" aria-label="Urutkan">
+        <option value="title">Urut: Judul A–Z</option>
+        <option value="author">Urut: Penulis A–Z</option>
+        <option value="newest">Urut: Terbaru</option>
+      </select>
+    </section>
+
+    <nav class="tabs" id="tabs" aria-label="Filter koleksi">
+      <button class="tab active" data-tab="all">🌸 Semua</button>
+      <button class="tab" data-tab="available">🍓 Tersedia</button>
+      <button class="tab" data-tab="borrowed">🎀 Dipinjam</button>
+      <button class="tab" data-tab="fav">💖 Favorit</button>
+    </nav>
+
+    <section class="grid" id="grid" aria-live="polite"></section>
+    <p class="empty" id="empty" hidden>
+      <svg class="mascot sad"><use href="#mochi"/></svg><br />
+      Mochi tidak menemukan bukunya... coba kata kunci lain ya 🥺
+    </p>
+  </main>
+
+  <footer class="footer">Dibuat dengan 💗 oleh Mochi · data tersimpan di browsermu</footer>
+
+  <!-- Dialog detail buku -->
+  <dialog id="detail">
+    <form method="dialog"><button class="close" aria-label="Tutup">✕</button></form>
+    <div class="detail-body" id="detailBody"></div>
+  </dialog>
+
+  <!-- Dialog tambah buku -->
+  <dialog id="addDialog">
+    <form method="dialog"><button class="close" aria-label="Tutup">✕</button></form>
+    <form id="addForm" class="add-form">
+      <h2>Tambah Buku Baru 📖</h2>
+      <label>Judul<input name="title" required maxlength="80" placeholder="Judul buku" /></label>
+      <label>Penulis<input name="author" required maxlength="60" placeholder="Nama penulis" /></label>
+      <div class="row">
+        <label>Kategori<select name="cat" id="addCat"></select></label>
+        <label>Tahun<input name="year" type="number" min="1000" max="2100" placeholder="2024" /></label>
+        <label>Emoji<input name="emoji" maxlength="2" value="📕" /></label>
+      </div>
+      <label>Sinopsis singkat<textarea name="desc" rows="3" maxlength="240" placeholder="Ceritakan sedikit tentang buku ini..."></textarea></label>
+      <button class="btn btn-primary" type="submit">Simpan Buku 💗</button>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
